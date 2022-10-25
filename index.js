@@ -1,17 +1,4 @@
 var port, textEncoder, writableStreamClosed, writer;
-var testes = [
-  "AT???",
-  "ATSI?",
-  "ATSP?",
-  "ATCT?",
-  "ATIT?",
-  "ATPT?",
-  "ATLM?",
-  "ATSR=02",
-  "ATSR=04",
-  "ATSR?",
-  "ATLP!",
-];
 
 async function connectSerial() {
   try {
@@ -22,27 +9,32 @@ async function connectSerial() {
     textEncoder = new TextEncoderStream();
     writableStreamClosed = textEncoder.readable.pipeTo(port.writable);
     writer = textEncoder.writable.getWriter();
-    console.log("deu certo!");
+    console.log("Serial conectada!");
   } catch (e) {
     console.log(e);
   }
   await listenToPort();
 }
 
-async function sendSerialLine(dado) {
-  if (dado == testes[0]) {
-    for (var i = 0; i < 3; i++) {
-      dataToSend = testes[i] + "\n" + "\r";
-      appendToTerminal("> " + dataToSend);
-      await writer.write(dataToSend);
-      if (dataToSend.trim().startsWith("\x03")) echo(false);
+var checkBoxes = document.querySelectorAll(".SH");
+
+var btn = document.querySelector("#send");
+
+btn.addEventListener("click", function (e) {
+  e.preventDefault();
+
+  checkBoxes.forEach(function (el) {
+    if (el.checked) {
+      sendSerialLine(el.value);
     }
-  } else {
-    dataToSend = dado + "\n" + "\r";
-    appendToTerminal("> " + dataToSend);
-    await writer.write(dataToSend);
-    if (dataToSend.trim().startsWith("\x03")) echo(false);
-  }
+  });
+});
+
+async function sendSerialLine(dado) {
+  dataToSend = dado + "\n" + "\r";
+  await writer.write(dataToSend);
+  if (dataToSend.trim().startsWith("\x03")) echo(false);
+  sleep(1000 * 3);
 }
 
 async function listenToPort() {
@@ -61,15 +53,22 @@ async function listenToPort() {
     }
     // Valor
     appendToTerminal(value);
-    console.log(value);
+    sleep(1000 * 3);
   }
 }
 
 const serialResultsDiv = document.getElementById("serialResults");
 
-async function appendToTerminal(newStuff) {
+function appendToTerminal(newStuff) {
   serialResultsDiv.innerHTML += newStuff;
+}
 
-  //scroll down to bottom of div
-  serialResultsDiv.scrollTop = serialResultsDiv.scrollHeight;
+function sleep(milliseconds) {
+  let timeStart = new Date().getTime();
+  while (true) {
+    let elapsedTime = new Date().getTime() - timeStart;
+    if (elapsedTime > milliseconds) {
+      break;
+    }
+  }
 }

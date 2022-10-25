@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="index.css" />
     <title>Ferramenta de Teste Produção</title>
   </head>
   <body>
@@ -37,17 +38,12 @@
     <br />
     <br />
 
-    <button onclick="sendSerialLine(testes[0]);">
-      Testes de identificação
-    </button>
-    <button onclick="sendSerialLine(testes[3]);">Teste Contadores</button>
-    <button onclick="sendSerialLine(testes[4]);">Temperatura e Humidade</button>
-    <button onclick="sendSerialLine(testes[5]);">Temperatura Probes</button>
-    <button onclick="sendSerialLine(testes[6]);">Funcionamento LSM</button>
-    <button onclick="sendSerialLine(testes[7]);">ASTSR=02</button>
-    <button onclick="sendSerialLine(testes[8]);">ASTSR=04</button>
-    <button onclick="sendSerialLine(testes[9]);">ASTSR?</button>
-    <button onclick="sendSerialLine(testes[10]);">Baixo Consumo</button>
+    <form action="">
+      <input type="checkbox" class="SH" value="AT???" /> Teste AT
+      <input type="checkbox" class="SH" value="ATSI?" /> Teste ATSI
+      <input type="checkbox" class="SH" value="ATCT?" /> Teste ATSP
+      <input type="submit" value="Enviar" id="send" />
+    </form>
 
     <br />
     <br />
