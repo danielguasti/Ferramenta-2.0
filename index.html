@@ -34,16 +34,44 @@
       <option value="256000">256000</option>
     </datalist>
     <button onclick="serialResultsDiv.innerHTML = '';">Clear</button>
+    <button id="aparecersh">SH</button>
+    <button id="aparecerpark">PARK</button>
 
     <br />
     <br />
 
-    <form action="">
-      <input type="checkbox" class="SH" value="AT???" /> Teste AT
-      <input type="checkbox" class="SH" value="ATSI?" /> Teste ATSI
-      <input type="checkbox" class="SH" value="ATCT?" /> Teste ATSP
-      <input type="submit" value="Enviar" id="send" />
-    </form>
+    <div id="SH">
+      <button onclick="sendSerialLine(testes[0])">Tipo Microcontrolador</button>
+      <button onclick="sendSerialLine(testes[1])">UUID</button>
+      <button onclick="sendSerialLine(testes[2])">PAC</button>
+      <button onclick="sendSerialLine(testes[3])">
+        Contagem dos contadores
+      </button>
+      <button onclick="sendSerialLine(testes[4])">
+        Temperatura e umidade interna
+      </button>
+      <button onclick="sendSerialLine(testes[5])">
+        Temperatura das Pobres
+      </button>
+      <button onclick="sendSerialLine(testes[6])">
+        Conectividade e comunicação do sensor LSM
+      </button>
+      <button onclick="sendSerialLine(testes[7])">
+        Cadastrar nova região das zonas sigfox
+      </button>
+      <button onclick="sendSerialLine(testes[8])">
+        Verificar Região das zonas sigfox
+      </button>
+      <button onclick="sendSerialLine(testes[9])">Modo de baixo consumo</button>
+    </div>
+
+    <div id="PARK">
+      <button>Teste park 1</button>
+      <button>Teste park 1</button>
+      <button>Teste park 1</button>
+      <button>Teste park 1</button>
+      <button>Teste park 1</button>
+    </div>
 
     <br />
     <br />

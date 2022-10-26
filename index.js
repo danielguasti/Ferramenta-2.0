@@ -1,4 +1,16 @@
 var port, textEncoder, writableStreamClosed, writer;
+var testes = [
+  "AT???",
+  "ATSI?",
+  "ATSP?",
+  "ATCT?",
+  "ATIT?",
+  "ATPT?",
+  "ATLM?",
+  "ATSR",
+  "ATSR?",
+  "ATLP!",
+];
 
 async function connectSerial() {
   try {
@@ -16,25 +28,9 @@ async function connectSerial() {
   await listenToPort();
 }
 
-var checkBoxes = document.querySelectorAll(".SH");
-
-var btn = document.querySelector("#send");
-
-btn.addEventListener("click", function (e) {
-  e.preventDefault();
-
-  checkBoxes.forEach(function (el) {
-    if (el.checked) {
-      sendSerialLine(el.value);
-    }
-  });
-});
-
 async function sendSerialLine(dado) {
-  dataToSend = dado + "\n" + "\r";
+  dataToSend = dado + "\r" + "\n";
   await writer.write(dataToSend);
-  if (dataToSend.trim().startsWith("\x03")) echo(false);
-  sleep(1000 * 3);
 }
 
 async function listenToPort() {
@@ -53,7 +49,6 @@ async function listenToPort() {
     }
     // Valor
     appendToTerminal(value);
-    sleep(1000 * 3);
   }
 }
 
@@ -61,14 +56,4 @@ const serialResultsDiv = document.getElementById("serialResults");
 
 function appendToTerminal(newStuff) {
   serialResultsDiv.innerHTML += newStuff;
-}
-
-function sleep(milliseconds) {
-  let timeStart = new Date().getTime();
-  while (true) {
-    let elapsedTime = new Date().getTime() - timeStart;
-    if (elapsedTime > milliseconds) {
-      break;
-    }
-  }
 }
