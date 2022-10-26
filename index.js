@@ -1,5 +1,5 @@
 var port, textEncoder, writableStreamClosed, writer;
-var testes = [
+var testesSH = [
   "AT???",
   "ATSI?",
   "ATSP?",
@@ -11,6 +11,31 @@ var testes = [
   "ATSR?",
   "ATLP!",
 ];
+var testesNQ = ["AT", "AT+LP"];
+
+const testessh = document.querySelector("#aparecersh");
+const SH = document.querySelector("#SH");
+
+const testesNQ = document.querySelector("#aparecernq");
+const NQ = document.querySelector("#NQ");
+
+testessh.addEventListener("click", function () {
+  if (SH.style.display === "none") {
+    NQ.style.display = "none";
+    SH.style.display = "block";
+  } else {
+    SH.style.display = "none";
+  }
+});
+
+testesNQ.addEventListener("click", function () {
+  if (NQ.style.display === "none") {
+    SH.style.display = "none";
+    NQ.style.display = "block";
+  } else {
+    NQ.style.display = "none";
+  }
+});
 
 async function connectSerial() {
   try {
