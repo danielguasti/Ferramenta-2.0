@@ -1,11 +1,85 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+#tudo {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  position: relative;
+}
+
+#conectar {
+  display: flex;
+  height: 10%;
+  border-bottom: 2px solid #0f044c;
+  justify-content: center;
+  align-items: center;
+  background-color: #787a91;
+}
+
+.botao-conectar,
+.botao-testes {
+  display: flex;
+  background-color: #141e61;
+  color: white;
+  border-radius: 5px;
+  height: 30px;
+  width: 150px;
+  box-shadow: 1px 1px 1px #0f044c;
+  padding: 1%;
+  margin: 1%;
+  align-items: center;
+  justify-content: center;
+}
+
+.botao-conectar:hover,
+.botao-testes:hover {
+  opacity: 80%;
+}
+
+button {
+  font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
+  background-color: #141e61;
+  color: white;
+  border-radius: 5px;
+  box-shadow: 1px 1px 1px #0f044c;
+  padding: 2px;
+  margin: 1%;
+}
+
+#btnaparecer {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  height: 10%;
+}
+
+#interacao {
+  display: flex;
+  flex: row;
+  height: 75%;
+  border: solid;
+  border-color: #0f044c;
+}
+
+#SH,
+#NQ {
+  width: 25%;
+  background-color: aqua;
+}
+
 #serialResults {
-  font-family: monospace;
+  display: flex;
+  width: 50%;
   white-space: pre;
-  height: calc(100% - 120px);
-  width: calc(100% - 20px);
-  border-style: solid;
   overflow: scroll;
-  background-color: rgb(88, 92, 92);
-  padding: 10px;
-  margin: 0px;
+  border-left: #0f044c;
 }

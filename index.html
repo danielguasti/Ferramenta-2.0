@@ -8,78 +8,104 @@
     <title>Ferramenta de Teste Produção</title>
   </head>
   <body>
-    <button onclick="connectSerial()">Conectar Dispositivo</button>
-    Baudrate:
-    <input
-      type="text"
-      id="baud"
-      list="baudList"
-      onclick="this.value = ''"
-      onchange="localStorage.baud = this.value"
-    />
-    <datalist id="baudList">
-      <option value="110">110</option>
-      <option value="300">300</option>
-      <option value="600">600</option>
-      <option value="1200">1200</option>
-      <option value="2400">2400</option>
-      <option value="4800">4800</option>
-      <option value="9600">9600</option>
-      <option value="14400">14400</option>
-      <option value="19200">19200</option>
-      <option value="38400">38400</option>
-      <option value="57600">57600</option>
-      <option value="115200">115200</option>
-      <option value="128000">128000</option>
-      <option value="256000">256000</option>
-    </datalist>
-    <button onclick="serialResultsDiv.innerHTML = '';">Clear</button>
-    <button id="aparecersh">SH</button>
-    <button id="aparecernq">NQ</button>
+    <div id="tudo">
+      <div id="conectar">
+        <button class="botao-conectar" onclick="connectSerial()">
+          Conectar Dispositivo
+        </button>
 
-    <br />
-    <br />
+        <b>Baudrate:</b>
+        <input
+          type="text"
+          id="baud"
+          list="baudList"
+          onclick="this.value = ''"
+          onchange="localStorage.baud = this.value"
+        />
+        <datalist id="baudList">
+          <option value="110">110</option>
+          <option value="300">300</option>
+          <option value="600">600</option>
+          <option value="1200">1200</option>
+          <option value="2400">2400</option>
+          <option value="4800">4800</option>
+          <option value="9600">9600</option>
+          <option value="14400">14400</option>
+          <option value="19200">19200</option>
+          <option value="38400">38400</option>
+          <option value="57600">57600</option>
+          <option value="115200">115200</option>
+          <option value="128000">128000</option>
+          <option value="256000">256000</option>
+        </datalist>
+        <button onclick="serialResultsDiv.innerHTML = '';">Clear</button>
+      </div>
 
-    <div id="SH" style="display: none">
-      <button onclick="sendSerialLine(testesSH[0])">
-        Tipo Microcontrolador
-      </button>
-      <button onclick="sendSerialLine(testesSH[1])">UUID</button>
-      <button onclick="sendSerialLine(testesSH[2])">PAC</button>
-      <button onclick="sendSerialLine(testesSH[3])">
-        Contagem dos contadores
-      </button>
-      <button onclick="sendSerialLine(testesSH[4])">
-        Temperatura e umidade interna
-      </button>
-      <button onclick="sendSerialLine(testesSH[5])">
-        Temperatura das Pobres
-      </button>
-      <button onclick="sendSerialLine(testesSH[6])">
-        Conectividade e comunicação do sensor LSM
-      </button>
-      <button onclick="sendSerialLine(testesSH[7])">
-        Cadastrar nova região das zonas sigfox
-      </button>
-      <button onclick="sendSerialLine(testesSH[8])">
-        Verificar Região das zonas sigfox
-      </button>
-      <button onclick="sendSerialLine(testesSH[9])">
-        Modo de baixo consumo
-      </button>
+      <div id="btnaparecer">
+        <button class="botao-conectar" id="aparecersh">SH</button>
+        <button class="botao-conectar" id="aparecernq">NQ</button>
+      </div>
+
+      <div id="interacao">
+        <div id="SH" style="visibility: hidden">
+          <button onclick="sendSerialLine(testesSH[0])">
+            Tipo Microcontrolador
+          </button>
+          <button onclick="sendSerialLine(testesSH[1])">UUID</button>
+          <button onclick="sendSerialLine(testesSH[2])">PAC</button>
+          <button onclick="sendSerialLine(testesSH[3])">
+            Contagem dos contadores
+          </button>
+          <button onclick="sendSerialLine(testesSH[4])">
+            Temperatura e umidade interna
+          </button>
+          <button onclick="sendSerialLine(testesSH[5])">
+            Temperatura das Pobres
+          </button>
+          <button onclick="sendSerialLine(testesSH[6])">
+            Conectividade e comunicação do sensor LSM
+          </button>
+          <button onclick="sendSerialLine(testesSH[7])">
+            Cadastrar nova região das zonas sigfox
+          </button>
+          <button onclick="sendSerialLine(testesSH[8])">
+            Verificar Região das zonas sigfox
+          </button>
+          <button onclick="sendSerialLine(testesSH[9])">
+            Modo de baixo consumo
+          </button>
+          <button onclick="sendSerialLine(testesSH[10])">
+            Encerra pré-produção
+          </button>
+        </div>
+
+        <div id="NQ" style="visibility: hidden">
+          <button onclick="sendSerialLine(testesNQ[0])">
+            Modo de pré-produção
+          </button>
+          <button onclick="sendSerialLine(testesNQ[1])">Baixo consumo</button>
+          <button onclick="sendSerialLine(testesNQ[2])">
+            Temperatura e Umidade interna
+          </button>
+          <button onclick="sendSerialLine(testesNQ[3])">IMEI</button>
+          <button onclick="sendSerialLine(testesNQ[4])">NCCID</button>
+          <button onclick="sendSerialLine(testesNQ[5])">
+            Qualidade do sinal da placa
+          </button>
+          <button onclick="sendSerialLine(testesNQ[6])">
+            Solda e comunicação do sensor
+          </button>
+          <button onclick="sendSerialLine(testesNQ[7])">
+            Contagem dos contadores
+          </button>
+          <button onclick="sendSerialLine(testesNQ[8])">
+            Temperatura das probes
+          </button>
+        </div>
+
+        <div id="serialResults"></div>
+      </div>
     </div>
-
-    <div id="NQ" style="display: none">
-      <button>Teste park 1</button>
-      <button>Teste park 1</button>
-      <button>Teste park 1</button>
-      <button>Teste park 1</button>
-      <button>Teste park 1</button>
-    </div>
-
-    <br />
-    <br />
-    <div id="serialResults"></div>
 
     <script src="index.js"></script>
   </body>

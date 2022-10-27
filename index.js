@@ -11,29 +11,40 @@ var testesSH = [
   "ATSR?",
   "ATLP!",
 ];
-var testesNQ = ["AT", "AT+LP"];
+var testesNQ = [
+  "AT",
+  "AT+LP",
+  "AT+SI?",
+  "AT+IMEI?",
+  "AT+NCCID?",
+  "AT+CSQ?",
+  "AT+LSM?",
+  "AT+CT?",
+  "AT+PTEMP?",
+  "AT+QUIT",
+];
 
 const testessh = document.querySelector("#aparecersh");
 const SH = document.querySelector("#SH");
 
-const testesNQ = document.querySelector("#aparecernq");
+const testesnq = document.querySelector("#aparecernq");
 const NQ = document.querySelector("#NQ");
 
 testessh.addEventListener("click", function () {
-  if (SH.style.display === "none") {
-    NQ.style.display = "none";
-    SH.style.display = "block";
+  if (SH.style.visibility === "hidden") {
+    NQ.style.visibility = "hidden";
+    SH.style.visibility = "visible";
   } else {
-    SH.style.display = "none";
+    SH.style.visibility = "hidden";
   }
 });
 
-testesNQ.addEventListener("click", function () {
-  if (NQ.style.display === "none") {
-    SH.style.display = "none";
-    NQ.style.display = "block";
+testesnq.addEventListener("click", function () {
+  if (NQ.style.visibility === "hidden") {
+    SH.style.visibility = "hidden";
+    NQ.style.visibility = "visible";
   } else {
-    NQ.style.display = "none";
+    NQ.style.visibility = "hidden";
   }
 });
 
@@ -55,6 +66,7 @@ async function connectSerial() {
 
 async function sendSerialLine(dado) {
   dataToSend = dado + "\r" + "\n";
+  appendToTerminal("> " + dataToSend);
   await writer.write(dataToSend);
 }
 
