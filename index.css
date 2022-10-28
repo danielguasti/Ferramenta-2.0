@@ -26,7 +26,8 @@ body {
 }
 
 .botao-conectar,
-.botao-testes {
+.botao-testes,
+.clear {
   display: flex;
   background-color: #141e61;
   color: white;
@@ -53,6 +54,8 @@ button {
   box-shadow: 1px 1px 1px #0f044c;
   padding: 2px;
   margin: 1%;
+  width: 80%;
+  height: 7%;
 }
 
 #btnaparecer {
@@ -71,9 +74,10 @@ button {
 }
 
 #SH,
-#NQ {
-  width: 25%;
-  background-color: aqua;
+#NQ,
+#nada {
+  display: flex;
+  width: 50%;
 }
 
 #serialResults {
@@ -81,5 +85,4 @@ button {
   width: 50%;
   white-space: pre;
   overflow: scroll;
-  border-left: #0f044c;
 }

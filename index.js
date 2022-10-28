@@ -30,21 +30,37 @@ const SH = document.querySelector("#SH");
 const testesnq = document.querySelector("#aparecernq");
 const NQ = document.querySelector("#NQ");
 
+const nada = document.querySelector("#nada");
+
 testessh.addEventListener("click", function () {
-  if (SH.style.visibility === "hidden") {
-    NQ.style.visibility = "hidden";
-    SH.style.visibility = "visible";
+  if (SH.style.display === "none") {
+    nada.style.display = "none";
+    NQ.style.display = "none";
+    SH.style.display = "block";
   } else {
-    SH.style.visibility = "hidden";
+    SH.style.display = "none";
+  }
+
+  if (SH.style.display == "none" && NQ.style.display == "none") {
+    nada.style.display = "block";
+  } else {
+    nada.style.display = "none";
   }
 });
 
 testesnq.addEventListener("click", function () {
-  if (NQ.style.visibility === "hidden") {
-    SH.style.visibility = "hidden";
-    NQ.style.visibility = "visible";
+  if (NQ.style.display === "none") {
+    nada.style.display = "none";
+    SH.style.display = "none";
+    NQ.style.display = "block";
   } else {
-    NQ.style.visibility = "hidden";
+    NQ.style.display = "none";
+  }
+
+  if (SH.style.display == "none" && NQ.style.display == "none") {
+    nada.style.display = "block";
+  } else {
+    nada.style.display = "none";
   }
 });
 
