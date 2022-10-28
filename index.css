@@ -43,7 +43,7 @@ body {
 
 .botao-conectar:hover,
 .botao-testes:hover,
-.clear {
+.clear:hover {
   opacity: 80%;
 }
 
@@ -58,6 +58,10 @@ button {
   width: 80%;
   max-width: 400px;
   height: 7%;
+}
+
+button:hover {
+  opacity: 95%;
 }
 
 #btnaparecer {

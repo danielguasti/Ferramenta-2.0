@@ -75,7 +75,7 @@ async function connectSerial() {
     writer = textEncoder.writable.getWriter();
     console.log("Serial conectada!");
   } catch (e) {
-    console.log(e);
+    alert(e);
   }
   await listenToPort();
 }
