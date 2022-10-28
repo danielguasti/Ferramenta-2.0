@@ -42,7 +42,8 @@ body {
 }
 
 .botao-conectar:hover,
-.botao-testes:hover {
+.botao-testes:hover,
+.clear {
   opacity: 80%;
 }
 
@@ -52,12 +53,11 @@ button {
   color: white;
   border-radius: 5px;
   box-shadow: 1px 1px 1px #0f044c;
-  padding: 10px;
-  margin-top: 10px;
-  margin-bottom: 10px;
+  padding: 2px;
+  margin-top: 8px;
   width: 80%;
   max-width: 400px;
-  height: 6%;
+  height: 7%;
 }
 
 #btnaparecer {
@@ -79,15 +79,19 @@ button {
 #NQ,
 #nada {
   text-align: center;
-  flex-wrap: nowrap;
   width: 50%;
 }
 
 #serialResults {
-  display: flex;
   width: 50%;
   white-space: pre;
   overflow: scroll;
   border-left: solid;
   border-color: #0f044c;
+  padding: 10px;
+}
+
+#finalpagina {
+  height: 5%;
+  background-color: #787a91;
 }
