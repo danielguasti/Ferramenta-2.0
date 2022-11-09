@@ -7,7 +7,7 @@ var testesSH = [
   "ATIT?",
   "ATPT?",
   "ATLM?",
-  "ATSR",
+  "ATSR?",
   "ATSR?",
   "ATLP!",
 ];
@@ -23,6 +23,7 @@ var testesNQ = [
   "AT+PTEMP?",
   "AT+QUIT",
 ];
+var valor;
 
 const testessh = document.querySelector("#aparecersh");
 const SH = document.querySelector("#SH");
@@ -81,19 +82,22 @@ async function connectSerial() {
 }
 
 async function sendSerialLine(dado) {
-  dataToSend = dado + "\r" + "\n";
-  appendToTerminal("> " + dataToSend);
+  dataToSend = testesSH[dado] + "\r";
+  console.log(testesSH[dado]);
+  appendToTerminal(">" + dataToSend);
   await writer.write(dataToSend);
+  valor = dado;
 }
 
 async function listenToPort() {
-  const textDecoder = new TextDecoderStream();
-  const readableStreamClosed = port.readable.pipeTo(textDecoder.writable);
-  const reader = textDecoder.readable.getReader();
+  const lineReader = port.readable
+    .pipeThrough(new TextDecoderStream())
+    .pipeThrough(new TransformStream(new LineBreakTransformer()))
+    .getReader();
 
   // ouvir os dados vindos da Serial.
   while (true) {
-    const { value, done } = await reader.read();
+    const { value, done } = await lineReader.read();
     if (done) {
       // Permite fechar a serial depois.
       console.log("[readLoop] DONE", done);
@@ -101,6 +105,7 @@ async function listenToPort() {
       break;
     }
     // Valor
+    console.log(value);
     appendToTerminal(value);
   }
 }
@@ -108,5 +113,42 @@ async function listenToPort() {
 const serialResultsDiv = document.getElementById("serialResults");
 
 function appendToTerminal(newStuff) {
-  serialResultsDiv.innerHTML += newStuff;
+  if (newStuff == "OK") {
+    serialResultsDiv.innerHTML += "\n" + newStuff + "\n" + "\n";
+  } else if (newStuff[0] == "H" || newStuff[0] == "S" || newStuff[0] == "P") {
+    serialResultsDiv.innerHTML += "\n" + newStuff;
+  } else {
+    serialResultsDiv.innerHTML += newStuff;
+  }
+  if (valor != 8 && newStuff == "OK") {
+    valor++;
+    sendSerialLine(valor);
+  }
+}
+
+function sleep(milliseconds) {
+  let timeStart = new Date().getTime();
+  while (true) {
+    let elapsedTime = new Date().getTime() - timeStart;
+    if (elapsedTime > milliseconds) {
+      break;
+    }
+  }
+}
+
+class LineBreakTransformer {
+  constructor() {
+    this.container = "";
+  }
+
+  transform(chunk, controller) {
+    this.container += chunk;
+    const lines = this.container.split("\r\n");
+    this.container = lines.pop();
+    lines.forEach((line) => controller.enqueue(line));
+  }
+
+  flush(controller) {
+    controller.enqueue(this.container);
+  }
 }
