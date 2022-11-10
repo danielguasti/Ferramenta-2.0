@@ -25,6 +25,14 @@ body {
   background-color: #787a91;
 }
 
+#escrever {
+  display: flex;
+  height: 10%;
+  border-bottom: 2px solid #0f044c;
+  justify-content: center;
+  align-items: center;
+}
+
 .botao-conectar,
 .botao-testes,
 .clear {
@@ -74,7 +82,7 @@ button:hover {
 #interacao {
   display: flex;
   flex: row;
-  height: 75%;
+  height: 70%;
   border: solid;
   border-color: #0f044c;
 }
@@ -93,9 +101,4 @@ button:hover {
   border-left: solid;
   border-color: #0f044c;
   padding: 10px;
-}
-
-#finalpagina {
-  height: 5%;
-  background-color: #787a91;
 }
