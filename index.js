@@ -1,28 +1,6 @@
 var port, textEncoder, writableStreamClosed, writer;
-var testesSH = [
-  "AT???",
-  "ATSI?",
-  "ATSP?",
-  "ATCT?",
-  "ATIT?",
-  "ATPT?",
-  "ATLM?",
-  "ATSR?",
-  "ATSR?",
-  "ATLP!",
-];
-var testesNQ = [
-  "AT",
-  "AT+LP",
-  "AT+SI?",
-  "AT+IMEI?",
-  "AT+NCCID?",
-  "AT+CSQ?",
-  "AT+LSM?",
-  "AT+CT?",
-  "AT+PTEMP?",
-  "AT+QUIT",
-];
+var testesSH = [];
+var testesNQ = [];
 var valor;
 
 const testessh = document.querySelector("#aparecersh");
@@ -65,6 +43,26 @@ testesnq.addEventListener("click", function () {
   }
 });
 
+var checkBoxes = document.querySelectorAll(".checkbox");
+var selecionados;
+document.querySelector(".todos").onclick = function (e) {
+  var marcar = e.target.checked;
+  for (var i = 0; i < checkBoxes.length; i++) {
+    checkBoxes[i].checked = marcar;
+  }
+};
+
+function verificarTestes() {
+  checkBoxes.forEach(function (el) {
+    if (el.checked) {
+      selecionados = testesSH.push(el.value);
+    }
+  });
+  console.log(testesSH);
+  console.log(selecionados);
+  sendSerialLine(0);
+}
+
 async function connectSerial() {
   try {
     // Escolher e conectar na porta serial escolhida
@@ -105,7 +103,6 @@ async function listenToPort() {
       break;
     }
     // Valor
-    console.log(value);
     appendToTerminal(value);
   }
 }
@@ -114,15 +111,15 @@ const serialResultsDiv = document.getElementById("serialResults");
 
 function appendToTerminal(newStuff) {
   if (newStuff == "OK") {
-    serialResultsDiv.innerHTML += "\n" + newStuff + "\n" + "\n";
-  } else if (newStuff[0] == "H" || newStuff[0] == "S" || newStuff[0] == "P") {
-    serialResultsDiv.innerHTML += "\n" + newStuff;
+    serialResultsDiv.innerHTML += newStuff + "\n" + "\n";
   } else {
-    serialResultsDiv.innerHTML += newStuff;
+    serialResultsDiv.innerHTML += newStuff + "\n";
   }
-  if (valor != 8 && newStuff == "OK") {
+  if (valor < selecionados - 1 && newStuff == "OK") {
     valor++;
     sendSerialLine(valor);
+  } else if (valor == selecionados - 1 && newStuff == "OK") {
+    testesSH = [];
   }
 }
 
