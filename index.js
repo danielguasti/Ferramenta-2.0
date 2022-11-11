@@ -1,6 +1,7 @@
-var port, textEncoder, writableStreamClosed, writer, valor, check;
-var testesSH = [];
-var testesNQ = [];
+let port, textEncoder, writableStreamClosed, writer, valor;
+let check = false;
+const testesSH = [];
+const testesNQ = [];
 
 const testessh = document.querySelector("#aparecersh");
 const SH = document.querySelector("#SH");
@@ -42,8 +43,8 @@ testesnq.addEventListener("click", function () {
   }
 });
 
-var checkBoxes = document.querySelectorAll(".checkbox");
-var selecionados;
+const checkBoxes = document.querySelectorAll(".checkbox");
+let selecionados;
 document.querySelector(".todos").onclick = function (e) {
   var marcar = e.target.checked;
   for (var i = 0; i < checkBoxes.length; i++) {
@@ -77,30 +78,4 @@ async function enviarTexto() {
   appendToTerminal(">" + dataToSend);
   await writer.write(dataToSend);
   check = false;
-}
-
-const serialResultsDiv = document.getElementById("serialResults");
-
-function appendToTerminal(newStuff) {
-  if (check == true) {
-    if (newStuff == "OK") {
-      serialResultsDiv.innerHTML += newStuff + "\n" + "\n";
-    } else {
-      serialResultsDiv.innerHTML += newStuff + "\n";
-    }
-    if (valor < selecionados - 1 && newStuff == "OK") {
-      valor++;
-      sendSerialLine(valor);
-    } else if (valor == selecionados - 1 && newStuff == "OK") {
-      testesSH = [];
-    }
-  }
-
-  if (check == false) {
-    if (newStuff == "OK") {
-      serialResultsDiv.innerHTML += newStuff + "\n" + "\n";
-    } else {
-      serialResultsDiv.innerHTML += newStuff + "\n";
-    }
-  }
 }
