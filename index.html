@@ -5,6 +5,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="index.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
+    />
     <title>Ferramenta de Teste Produção</title>
   </head>
   <body>
@@ -56,110 +60,109 @@
       <div id="interacao">
         <div id="SH" style="display: none">
           <label>Todos os Testes <input class="todos" type="checkbox" /></label>
-          <br />
-          <br />
+
           <label>
             Tipo Microcontrolador
             <input class="checkbox" type="checkbox" value="AT???" />
           </label>
-          <br />
+
           <label>
             UUID <input class="checkbox" type="checkbox" value="ATSI?" />
           </label>
-          <br />
+
           <label
             >PAC <input class="checkbox" type="checkbox" value="ATSP?"
           /></label>
-          <br />
+
           <label>
             Contagem dos contadores
             <input class="checkbox" type="checkbox" value="ATCT?" />
           </label>
-          <br />
+
           <label>
             Temperatura e Humidade Interna
             <input class="checkbox" type="checkbox" value="ATIT?" />
           </label>
-          <br />
+
           <label>
             Temperatura das Probes
             <input class="checkbox" type="checkbox" value="ATPT?" />
           </label>
-          <br />
+
           <label>
             Conectividade e Comunicação do Sensor LSM
             <input class="checkbox" type="checkbox" value="ATLM?" />
           </label>
-          <br />
+
           <label>
             Verificar região das zonas sigfox
             <input class="checkbox" type="checkbox" value="ATSR?" />
           </label>
-          <br />
+
           <label>
             Modo de baixo consumo
             <input class="checkbox" type="checkbox" value="AT???" />
           </label>
-          <br />
+
           <button onclick="verificarTestes()">Realizar testes</button>
         </div>
 
         <div id="NQ" style="display: none">
           <label>Teste Geral <input class="tudo" type="checkbox" /></label>
-          <br />
+
           <label
             >Modo de pré-produção
             <input class="checkbox-NQ" type="checkbox" value="AT"
           /></label>
-          <br />
+
           <label
             >Reiniciar o Dispositivo<input
               class="checkbox-NQ"
               type="checkbox"
               value="AT+RESET"
           /></label>
-          <br />
+
           <label
             >Retomar funcionamento Normal<input
               class="checkbox-NQ"
               type="checkbox"
               value="AT+QUIT"
           /></label>
-          <br />
+
           <label
             >IMEI<input class="checkbox-NQ" type="checkbox" value="AT+IMEI?"
           /></label>
-          <br />
+
           <label
             >NCCID<input class="checkbox-NQ" type="checkbox" value="AT+NCCID?"
           /></label>
-          <br />
+
           <label
             >Sensor LSM<input
               class="checkbox-NQ"
               type="checkbox"
               value="AT+LSM?"
           /></label>
-          <br />
+
           <label
             >Conversor AD de Bateria<input
               class="checkbox-NQ"
               type="checkbox"
               value="AT+BT"
           /></label>
-          <br />
+
           <label
             >Contadores
             <input class="checkbox-NQ" type="checkbox" value="AT+CT?"
           /></label>
-          <br />
+
           <label
             >Temperatura probes<input
               class="checkbox-NQ"
               type="checkbox"
               value="AT+PTEMP?"
           /></label>
-          <br />
+
           <button onclick="verificarTestesNQ()">Realizar testes</button>
         </div>
 
