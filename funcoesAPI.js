@@ -51,33 +51,3 @@ class LineBreakTransformer {
     controller.enqueue(this.container);
   }
 }
-
-const serialResultsDiv = document.getElementById("serialResults");
-
-function appendToTerminal(newStuff) {
-  if (check == true) {
-    if (newStuff == "OK" || newStuff == "ERRO") {
-      serialResultsDiv.innerHTML += newStuff + "\n" + "\n";
-    } else {
-      serialResultsDiv.innerHTML += newStuff + "\n";
-    }
-    if (valor < selecionados - 1 && (newStuff == "OK" || newStuff == "ERRO")) {
-      valor++;
-      sendSerialLine(valor);
-    } else if (
-      valor == selecionados - 1 &&
-      (newStuff == "OK" || newStuff == "ERRO")
-    ) {
-      testesSH = [];
-      check == false;
-    }
-  }
-
-  if (check == false) {
-    if (newStuff == "OK") {
-      serialResultsDiv.innerHTML += newStuff + "\n" + "\n";
-    } else {
-      serialResultsDiv.innerHTML += newStuff + "\n";
-    }
-  }
-}

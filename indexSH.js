@@ -1,7 +1,6 @@
 let port, textEncoder, writableStreamClosed, writer, valor;
 let check = false;
-const testesSH = [];
-const testesNQ = [];
+let testes = [];
 
 const testessh = document.querySelector("#aparecersh");
 const SH = document.querySelector("#SH");
@@ -55,17 +54,17 @@ document.querySelector(".todos").onclick = function (e) {
 function verificarTestes() {
   checkBoxes.forEach(function (el) {
     if (el.checked) {
-      selecionados = testesSH.push(el.value);
+      selecionados = testes.push(el.value);
     }
   });
-  console.log(testesSH);
+  console.log(testes);
   console.log(selecionados);
   sendSerialLine(0);
 }
 
 async function sendSerialLine(dado) {
-  dataToSend = testesSH[dado] + "\r";
-  console.log(testesSH[dado]);
+  dataToSend = testes[dado] + "\r";
+  console.log(testes[dado]);
   appendToTerminal(">" + dataToSend);
   await writer.write(dataToSend);
   valor = dado;
@@ -78,4 +77,34 @@ async function enviarTexto() {
   appendToTerminal(">" + dataToSend);
   await writer.write(dataToSend);
   check = false;
+}
+
+const serialResultsDiv = document.getElementById("serialResults");
+
+function appendToTerminal(newStuff) {
+  if (check == true) {
+    if (newStuff == "OK" || newStuff == "ERRO") {
+      serialResultsDiv.innerHTML += newStuff + "\n" + "\n";
+    } else {
+      serialResultsDiv.innerHTML += newStuff + "\n";
+    }
+    if (valor < selecionados - 1 && (newStuff == "OK" || newStuff == "ERRO")) {
+      valor++;
+      sendSerialLine(valor);
+    } else if (
+      valor == selecionados - 1 &&
+      (newStuff == "OK" || newStuff == "ERRO")
+    ) {
+      testes = [];
+      check == false;
+    }
+  }
+
+  if (check == false) {
+    if (newStuff == "OK") {
+      serialResultsDiv.innerHTML += newStuff + "\n" + "\n";
+    } else {
+      serialResultsDiv.innerHTML += newStuff + "\n";
+    }
+  }
 }
