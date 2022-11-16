@@ -1,6 +1,6 @@
-var port, textEncoder, writableStreamClosed, writer, valor, check;
-var testesSH = [];
-var testesNQ = [];
+let port, textEncoder, writableStreamClosed, writer, valor;
+let check = false;
+let testes = [];
 
 const testessh = document.querySelector("#aparecersh");
 const SH = document.querySelector("#SH");
@@ -42,8 +42,8 @@ testesnq.addEventListener("click", function () {
   }
 });
 
-var checkBoxes = document.querySelectorAll(".checkbox");
-var selecionados;
+const checkBoxes = document.querySelectorAll(".checkbox");
+let selecionados;
 document.querySelector(".todos").onclick = function (e) {
   var marcar = e.target.checked;
   for (var i = 0; i < checkBoxes.length; i++) {
@@ -54,17 +54,17 @@ document.querySelector(".todos").onclick = function (e) {
 function verificarTestes() {
   checkBoxes.forEach(function (el) {
     if (el.checked) {
-      selecionados = testesSH.push(el.value);
+      selecionados = testes.push(el.value);
     }
   });
-  console.log(testesSH);
+  console.log(testes);
   console.log(selecionados);
   sendSerialLine(0);
 }
 
 async function sendSerialLine(dado) {
-  dataToSend = testesSH[dado] + "\r";
-  console.log(testesSH[dado]);
+  dataToSend = testes[dado] + "\r";
+  console.log(testes[dado]);
   appendToTerminal(">" + dataToSend);
   await writer.write(dataToSend);
   valor = dado;
@@ -83,16 +83,20 @@ const serialResultsDiv = document.getElementById("serialResults");
 
 function appendToTerminal(newStuff) {
   if (check == true) {
-    if (newStuff == "OK") {
+    if (newStuff == "OK" || newStuff == "ERRO") {
       serialResultsDiv.innerHTML += newStuff + "\n" + "\n";
     } else {
       serialResultsDiv.innerHTML += newStuff + "\n";
     }
-    if (valor < selecionados - 1 && newStuff == "OK") {
+    if (valor < selecionados - 1 && (newStuff == "OK" || newStuff == "ERRO")) {
       valor++;
       sendSerialLine(valor);
-    } else if (valor == selecionados - 1 && newStuff == "OK") {
-      testesSH = [];
+    } else if (
+      valor == selecionados - 1 &&
+      (newStuff == "OK" || newStuff == "ERRO")
+    ) {
+      testes = [];
+      check == false;
     }
   }
 

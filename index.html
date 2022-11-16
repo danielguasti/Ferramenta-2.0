@@ -10,10 +10,6 @@
   <body>
     <div id="tudo">
       <div id="conectar">
-        <button class="botao-conectar" onclick="connectSerial()">
-          Conectar Dispositivo
-        </button>
-
         <b>Baudrate:</b>
         <input
           type="text"
@@ -38,6 +34,11 @@
           <option value="128000">128000</option>
           <option value="256000">256000</option>
         </datalist>
+
+        <button class="botao-conectar" onclick="connectSerial()">
+          Conectar Dispositivo
+        </button>
+
         <button class="clear" onclick="serialResultsDiv.innerHTML = '';">
           Clear
         </button>
@@ -54,61 +55,112 @@
 
       <div id="interacao">
         <div id="SH" style="display: none">
-          <h2>Todos os Testes <input class="todos" type="checkbox" /></h2>
+          <label>Todos os Testes <input class="todos" type="checkbox" /></label>
           <br />
           <br />
-          <h4>
+          <label>
             Tipo Microcontrolador
             <input class="checkbox" type="checkbox" value="AT???" />
-          </h4>
+          </label>
           <br />
-          <h4>UUID <input class="checkbox" type="checkbox" value="ATSI?" /></h4>
+          <label>
+            UUID <input class="checkbox" type="checkbox" value="ATSI?" />
+          </label>
           <br />
-          <h4>PAC <input class="checkbox" type="checkbox" value="ATSP?" /></h4>
+          <label
+            >PAC <input class="checkbox" type="checkbox" value="ATSP?"
+          /></label>
           <br />
-          <h4>
+          <label>
             Contagem dos contadores
             <input class="checkbox" type="checkbox" value="ATCT?" />
-          </h4>
+          </label>
           <br />
-          <h4>
+          <label>
             Temperatura e Humidade Interna
             <input class="checkbox" type="checkbox" value="ATIT?" />
-          </h4>
+          </label>
           <br />
-          <h4>
+          <label>
             Temperatura das Probes
             <input class="checkbox" type="checkbox" value="ATPT?" />
-          </h4>
+          </label>
           <br />
-          <h4>
+          <label>
             Conectividade e Comunicação do Sensor LSM
             <input class="checkbox" type="checkbox" value="ATLM?" />
-          </h4>
+          </label>
           <br />
-          <h4>
+          <label>
             Verificar região das zonas sigfox
             <input class="checkbox" type="checkbox" value="ATSR?" />
-          </h4>
+          </label>
           <br />
-          <h4>
+          <label>
             Modo de baixo consumo
-            <input class="checkbox" type="checkbox" value="ATLP!" />
-          </h4>
+            <input class="checkbox" type="checkbox" value="AT???" />
+          </label>
           <br />
           <button onclick="verificarTestes()">Realizar testes</button>
         </div>
 
         <div id="NQ" style="display: none">
-          <button>Modo de pré-produção</button>
-          <button>Baixo consumo</button>
-          <button>Temperatura e Umidade interna</button>
-          <button>IMEI</button>
-          <button>NCCID</button>
-          <button>Qualidade do sinal da placa</button>
-          <button>Solda e comunicação do sensor</button>
-          <button>Contagem dos contadores</button>
-          <button>Temperatura das probes</button>
+          <label>Teste Geral <input class="tudo" type="checkbox" /></label>
+          <br />
+          <label
+            >Modo de pré-produção
+            <input class="checkbox-NQ" type="checkbox" value="AT"
+          /></label>
+          <br />
+          <label
+            >Reiniciar o Dispositivo<input
+              class="checkbox-NQ"
+              type="checkbox"
+              value="AT+RESET"
+          /></label>
+          <br />
+          <label
+            >Retomar funcionamento Normal<input
+              class="checkbox-NQ"
+              type="checkbox"
+              value="AT+QUIT"
+          /></label>
+          <br />
+          <label
+            >IMEI<input class="checkbox-NQ" type="checkbox" value="AT+IMEI?"
+          /></label>
+          <br />
+          <label
+            >NCCID<input class="checkbox-NQ" type="checkbox" value="AT+NCCID?"
+          /></label>
+          <br />
+          <label
+            >Sensor LSM<input
+              class="checkbox-NQ"
+              type="checkbox"
+              value="AT+LSM?"
+          /></label>
+          <br />
+          <label
+            >Conversor AD de Bateria<input
+              class="checkbox-NQ"
+              type="checkbox"
+              value="AT+BT"
+          /></label>
+          <br />
+          <label
+            >Contadores
+            <input class="checkbox-NQ" type="checkbox" value="AT+CT?"
+          /></label>
+          <br />
+          <label
+            >Temperatura probes<input
+              class="checkbox-NQ"
+              type="checkbox"
+              value="AT+PTEMP?"
+          /></label>
+          <br />
+          <button onclick="verificarTestesNQ()">Realizar testes</button>
         </div>
 
         <div id="nada"></div>
@@ -117,7 +169,8 @@
       </div>
     </div>
 
-    <script src="index.js"></script>
+    <script src="indexSH.js"></script>
     <script src="funcoesAPI.js"></script>
+    <script src="indexNQ.js"></script>
   </body>
 </html>
